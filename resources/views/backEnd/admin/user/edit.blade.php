@@ -38,7 +38,7 @@
                     <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
                         {!! Form::label('password', 'Contraseña: ', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::password('password', ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!} {!! $errors->first('password',
+                            {!! Form::password('password', ['class' => 'form-control col-md-7 col-xs-12']) !!} {!! $errors->first('password',
                             '
                             <p class="help-block">:message</p>') !!}
                         </div>
@@ -51,6 +51,18 @@
                             <p class="help-block">:message</p>') !!}
                         </div>
                     </div>
+
+                    <div class="form-group @if ($errors->has('roles')) has-error @endif">
+                        {!! Form::label('roles[]', 'Roles:', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::select('roles[]', $roles, isset($user) ? $user->roles->pluck('id')->toArray() : null, ['class' => 'form-control',
+                            'multiple']) !!} @if ($errors->has('roles'))
+                            <p class="help-block">{{ $errors->first('roles') }}</p> @endif
+                        </div>
+                    </div>
+                    <!-- Permissions -->
+                    @if(isset($user)) @include('shared._permissions', ['closed' => 'true', 'model' => $user ]) @endif
+
 
 
                     <div class="ln_solid"></div>

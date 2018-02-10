@@ -14,9 +14,10 @@
     @endif
 
     <h1>Catálogo de usuarios
-        <a href="{{ url('admin/user/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Usuario</a>
+        @can('agregar_usuarios')<a href="{{ url('admin/user/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Usuario</a>@endcan
     </h1>
     <div class="table table-responsive">
+    @can('ver_usuarios')
         <table class="table table-bordered table-striped table-hover" id="user">
             <thead>
                 <tr>
@@ -37,14 +38,15 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->password }}</td>
                     <td>
-                        <a href="{{ url('admin/user/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a>
-                        {!! Form::open([ 'method'=>'DELETE', 'url' => ['admin/user', $item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar',
-                        ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}
+                        @can('editar_usuarios')<a href="{{ url('admin/user/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a>@endcan
+                        @can('eliminar_usuarios'){!! Form::open([ 'method'=>'DELETE', 'url' => ['admin/user', $item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar',
+                        ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}@endcan
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        @endcan
     </div>
 </div>
 

@@ -62,19 +62,26 @@
                             <span class="fa fa-chevron-down"></span>
                         </a>
                         <ul class="nav child_menu">
+                        @can('ver_planteles')
                             <li>
                                 <a href="{{url('admin/campus')}}">Planteles</a>
                             </li>
+                        @endcan
+                        @can('ver_poblacion')
                             <li>
                                 <a href="{{url('control/population')}}">Población estudiantil</a>
                             </li>
+                        @endcan
+                        @can('ver_usuarios')
                             <li>
                                 <a href="{{url('admin/user')}}">Usuarios</a>
                             </li>
+                        @endcan
+                        @can('ver_roles')
                             <li>
-                                <a href="#">Roles</a>
+                                <a href="{{url('admin/roles')}}">Roles</a>
                             </li>
-
+                        @endcan
                         </ul>
                     </li>
                 </ul>

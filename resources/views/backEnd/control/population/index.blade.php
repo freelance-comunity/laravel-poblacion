@@ -12,9 +12,9 @@
         </div>
     </div>
     @endif
-    <h1>Población estudiantil
+    <h1>Población estudiantil @can('agregar_poblacion')
         <button type="button" class="btn btn-warning pull-right btn-sm" data-toggle="modal" data-target=".excel">Subir Excel</button>
-        <a href="{{ url('control/population/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Registro</a>
+        <a href="{{ url('control/population/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Registro</a>@endcan
     </h1>
     <div class="table table-responsive">
         <table class="table table-bordered table-striped table-hover" id="population">
@@ -47,9 +47,10 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->turn }}</td>
                     <td>
-                        <a href="{{ url('control/population/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a>
-                        {!! Form::open([ 'method'=>'DELETE', 'url' => ['control/population', $item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar',
-                        ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}
+                       
+                        <a href="{{ url('control/population/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a> 
+                        {!! Form::open([ 'method'=>'DELETE', 'url' => ['control/population',$item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}
+                       
                     </td>
                 </tr>
                 @endforeach

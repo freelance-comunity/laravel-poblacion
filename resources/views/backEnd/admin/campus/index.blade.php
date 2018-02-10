@@ -13,9 +13,10 @@
     </div>
     @endif
     <h1>Catálogo de planteles
-        <a href="{{ url('admin/campus/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Plantel</a>
+        @can('agregar_planteles')<a href="{{ url('admin/campus/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Plantel</a>@endcan
     </h1>
     <div class="table table-responsive">
+    @can('ver_planteles')
         <table class="table table-bordered table-striped table-hover" id="campus">
             <thead class="heading">
                 <tr>
@@ -36,14 +37,15 @@
                     <td>{{ $item->address }}</td>
                     <td>{{ $item->postal_code }}</td>
                     <td>
-                        <a href="{{ url('admin/campus/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a>
-                        {!! Form::open([ 'method'=>'DELETE', 'url' => ['admin/campus', $item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar',
-                        ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}
+                        @can('editar_planteles')<a href="{{ url('admin/campus/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a>@endcan
+                        @can('eliminar_planteles'){!! Form::open([ 'method'=>'DELETE', 'url' => ['admin/campus', $item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar',
+                        ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}@endcan
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+    @endcan
     </div>
 </div>
 

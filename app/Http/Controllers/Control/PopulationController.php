@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 use \Excel;
+use Illuminate\Support\Facades\Input;
 use DB;
 
 class PopulationController extends Controller
@@ -121,22 +122,20 @@ class PopulationController extends Controller
 
     public function importExcel(Request $request)
     {
-                try {
+         try {
             if ($request->hasFile('excel')) {
                 $this->validate($request, ['excel' => 'required']);
 
                 \Excel::selectSheets('POBLACION')->load($request->excel, function ($reader) {
-                    $excel = $reader->get();
+                    //$excel = $reader->get()->toArray();
                     //iteración
                     $reader->each(function ($row) {
-                        // echo $row->matricula;
-                        // echo "<br>";
+                       
                         $enrollment = $row->matricula;
                         $query = DB::table('populations')->where('enrollment', $enrollment);
                         $exists = $query->first();
                         // Checamos si ya existe un registro con la misma matricula, de ser así omitimos este paso
                         // y saltamos al else para realizar un update del registro ya existente de esa matricula
-
                         if (!$exists) {
                             $archive = new Population;
                             $archive->month = trim($row->mes);

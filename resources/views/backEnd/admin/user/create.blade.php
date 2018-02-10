@@ -23,17 +23,17 @@
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                         {!! Form::label('name', 'Nombre completo: ', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::text('name', null, ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!} {!! $errors->first('name', '
-                            <p
-                                class="help-block">:message</p>') !!}
+                            {!! Form::text('name', null, ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!} {!! $errors->first('name',
+                            '
+                            <p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                         {!! Form::label('email', 'Correo electrónico: ', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::email('email', null, ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!} {!! $errors->first('email', '
-                            <p
-                                class="help-block">:message</p>') !!}
+                            {!! Form::email('email', null, ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!} {!! $errors->first('email',
+                            '
+                            <p class="help-block">:message</p>') !!}
                         </div>
                     </div>
                     <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
@@ -47,11 +47,21 @@
                     <div class="form-group {{ $errors->has('campus_id') ? 'has-error' : ''}}">
                         {!! Form::label('campus_id', 'Plantel: ', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            {!! Form::select('campus_id', $campuses,null, ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!} {!! $errors->first('campus_id',
-                            '
+                            {!! Form::select('campus_id', $campuses,null, ['class' => 'form-control col-md-7 col-xs-12', 'required' => 'required']) !!}
+                            {!! $errors->first('campus_id', '
                             <p class="help-block">:message</p>') !!}
                         </div>
                     </div>
+                    <div class="form-group @if ($errors->has('roles')) has-error @endif">
+                        {!! Form::label('roles[]', 'Roles:', ['class' => 'col-sm-3 control-label']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::select('roles[]', $roles, isset($user) ? $user->roles->pluck('id')->toArray() : null, ['class' => 'form-control',
+                            'multiple']) !!} @if ($errors->has('roles'))
+                            <p class="help-block">{{ $errors->first('roles') }}</p> @endif
+                        </div>
+                    </div>
+                    <!-- Permissions -->
+                    @if(isset($user)) @include('shared._permissions', ['closed' => 'true', 'model' => $user ]) @endif
 
 
                     <div class="ln_solid"></div>

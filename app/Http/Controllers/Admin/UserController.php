@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use App\Campus;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 use Hash;
+use Auth;
 
 class UserController extends Controller
 {
@@ -35,8 +38,10 @@ class UserController extends Controller
     public function create()
     {   
         $campuses = Campus::pluck('name', 'id');
+        $roles = Role::pluck('name', 'id');
         return view('backEnd.admin.user.create')
-        ->with('campuses', $campuses);
+        ->with('campuses', $campuses)
+        ->with('roles', $roles);
     }
 
     /**
@@ -46,13 +51,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'email' => 'required', 'password' => 'required', 'campus_id' => 'required', ]);
-        $input = $request->all();
-        $input['password']= Hash::make($request->input('password'));
-        User::create($input);
+        $this->validate($request, ['name' => 'required', 'email' => 'required|string|email|max:255|unique:users', 'password' => 'required|string|min:6', 'roles' => 'required|min:1']);
+        // hash password
+        $request->merge(['password' => bcrypt($request->get('password'))]);
 
-        Session::flash('message', 'Usuario creado.');
-        Session::flash('status', 'success');
+        // Create the user
+        if ($user = User::create($request->except('roles', 'permissions'))) {
+            $this->syncPermissions($request, $user);
+
+            Session::flash('message', 'Usuario agregado.');
+            Session::flash('status', 'success');
+        } else {
+            Session::flash('message', 'Usuario agregado.');
+            Session::flash('status', 'success');
+        }
 
         return redirect('admin/user');
     }
@@ -82,7 +94,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $campuses = Campus::pluck('name', 'id');
-        return view('backEnd.admin.user.edit', compact('user', 'campuses'));
+        $roles = Role::pluck('name', 'id');
+        $permissions = Permission::all('name', 'id');
+        return view('backEnd.admin.user.edit', compact('user', 'campuses', 'roles', 'permissions'));
     }
 
     /**
@@ -94,10 +108,23 @@ class UserController extends Controller
      */
     public function update($id, Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'email' => 'required', 'password' => 'required', 'campus_id' => 'required', ]);
+        $this->validate($request, ['name' => 'required', 'email' => 'required|email|unique:users,email,' . $id, 'roles' => 'required|min:1']);
 
+        // Get the user
         $user = User::findOrFail($id);
-        $user->update($request->all());
+
+        // Update user
+        $user->fill($request->except('roles', 'permissions', 'password'));
+
+        // check for password change
+        if ($request->get('password')) {
+            $user->password = bcrypt($request->get('password'));
+        }
+
+        // Handle the user roles
+        $this->syncPermissions($request, $user);
+
+        $user->save();
 
         Session::flash('message', 'Usuario actualizado.');
         Session::flash('status', 'success');
@@ -114,14 +141,51 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        if (Auth::user()->id == $id) {
+            Session::flash('message', 'La eliminación de tu propio usuario actualmente no está permitida.');
+            Session::flash('status', 'success');
+             return redirect('admin/user');
+        }
 
-        $user->delete();
+        if (User::findOrFail($id)->delete()) {
+            Session::flash('message', 'Usuario eliminado.');
+            Session::flash('status', 'success');
+        } else {
+            Session::flash('message', 'Usuario no eliminado.');
+            Session::flash('status', 'success');
+        }
 
-        Session::flash('message', 'Usuario eliminado.');
-        Session::flash('status', 'success');
+         return redirect('admin/user');
+    }
 
-        return redirect('admin/user');
+    /**
+    * Sync roles and permissions
+    *
+    * @param Request $request
+    * @param $user
+    * @return string
+    */
+    private function syncPermissions(Request $request, $user)
+    {
+        // Get the submitted roles
+        $roles = $request->get('roles', []);
+        $permissions = $request->get('permissions', []);
+
+        // Get the roles
+        $roles = Role::find($roles);
+
+        // check for current role changes
+        if (! $user->hasAllRoles($roles)) {
+            // reset all direct permissions for user
+            $user->permissions()->sync([]);
+        } else {
+            // handle permissions
+            $user->syncPermissions($permissions);
+        }
+
+        $user->syncRoles($roles);
+
+        return $user;
     }
 
 }

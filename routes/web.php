@@ -25,3 +25,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('admin/user', 'Admin\\UserController');
 });
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('admin/roles', 'Admin\\RolesController');
+  Route::get('permisos', 'Admin\\RolesController@permisos');
+});

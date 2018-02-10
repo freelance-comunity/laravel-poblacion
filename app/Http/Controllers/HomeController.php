@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Population;
+use App\Models\User;
 use Charts;
 use DB;
 use App\Http\Requests;
@@ -26,7 +27,8 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $users = User::all();
         $a = Population::where('status', 'A');
         $b = Population::where('status', 'B');
         $esco = Population::where('system', 'ESCOLARIZADO');
@@ -130,6 +132,7 @@ class HomeController extends Controller
             ->responsive(true);
 
         return view('home')
+            ->with('users', $users)
             ->with('actives', $actives)
             ->with('lows', $lows)
             ->with('graduates', $graduates)
