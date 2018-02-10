@@ -166,6 +166,7 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Roland\Crud\CrudServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Laravel\Tinker\TinkerServiceProvider::class,
     ],
 
     /*

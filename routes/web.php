@@ -19,3 +19,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::resource('control/population', 'Control\\PopulationController');
 	Route::post('/import-excel', 'Control\\PopulationController@importExcel');
 });
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('admin/campus', 'Admin\\CampusController');
+});
+Route::group(['middleware' => ['web']], function () {
+	Route::resource('admin/user', 'Admin\\UserController');
+});

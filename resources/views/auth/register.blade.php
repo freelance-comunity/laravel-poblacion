@@ -33,6 +33,8 @@
 			{!! BootForm::password('password', 'Password', ['placeholder' => 'Password']) !!}
 
 			{!! BootForm::password('password_confirmation', 'Password confirmation', ['placeholder' => 'Confirmation']) !!}
+
+			{!! BootForm::text('campus_id', 'ID de plantel', old('name'), ['placeholder' => 'Escribe ID de plantel']) !!}
 		
 			{!! BootForm::submit('Register', ['class' => 'btn btn-default']) !!}
 		   

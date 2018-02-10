@@ -37,11 +37,10 @@
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="tile-stats">
                         <div class="icon">
-                            <i class="fa fa-check-square-o"></i>
+                            <i class="fa fa-users"></i>
                         </div>
                         <div class="count">179</div>
-                        <h3>New Sign ups</h3>
-                        <p>Lorem ipsum psdea itgum rixt.</p>
+                        <h3>Usuarios registrados</h3>
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@
     </h1>
     <div class="table table-responsive">
         <table class="table table-bordered table-striped table-hover" id="population">
-            <thead>
+            <thead class="heading">
                 <tr>
                     <th>ID</th>
                     <th>Mes</th>
@@ -75,7 +75,7 @@
                     <p class="help-block">:message</p>') !!}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 {!! Form::submit('Subir', ['class' => 'btn btn-primary']) !!}
             </div>
             </form>

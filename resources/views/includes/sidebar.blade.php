@@ -63,13 +63,13 @@
                         </a>
                         <ul class="nav child_menu">
                             <li>
-                                <a href="#">Planteles</a>
+                                <a href="{{url('admin/campus')}}">Planteles</a>
                             </li>
                             <li>
-                                <a href="control/population">Población estudiantil</a>
+                                <a href="{{url('control/population')}}">Población estudiantil</a>
                             </li>
                             <li>
-                                <a href="#">Usuarios</a>
+                                <a href="{{url('admin/user')}}">Usuarios</a>
                             </li>
                             <li>
                                 <a href="#">Roles</a>
