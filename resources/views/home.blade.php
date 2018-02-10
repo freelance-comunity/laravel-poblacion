@@ -2,7 +2,6 @@
 <!-- Example -->
 <!--<link href=" <link href="{{ asset("css/myFile.min.css") }}" rel="stylesheet">" rel="stylesheet">-->
 @endpush @section('main_container')
-
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="row">
@@ -120,7 +119,7 @@
         <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Bajas por sistema Escolarizado / Semiescolarizado
+                    <h2>Bajas por sistema (Semiescolarizado / Escolarizado)
                         <small>Graficas</small>
                     </h2>
                     <div class="clearfix"></div>
