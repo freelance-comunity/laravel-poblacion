@@ -25,6 +25,7 @@
 </head>
 
 <body class="nav-md">
+<div id="fullscreen">
     <div class="container body">
         <div class="main_container">
 
@@ -38,7 +39,7 @@
 
         </div>
     </div>
-
+</div>
     <!-- jQuery -->
     <script src="{{ asset("js/jquery.min.js") }}"></script>
     <!-- Bootstrap -->
@@ -47,8 +48,41 @@
     <script src="{{ asset("js/gentelella.min.js") }}"></script>
     {{-- Datatables --}}
     <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    {{-- Fullscreen --}}
+    <script src="{{ asset("js/jquery.fullscreen.min.js") }}"></script>
+    	<script type="text/javascript">
+				$(function() {
+					// check native support
+					$('#support').text($.fullscreen.isNativelySupported() ? 'supports' : 'doesn\'t support');
 
-   
+					// open in fullscreen
+					$('#fullscreen .requestfullscreen').click(function() {
+						$('#fullscreen').fullscreen();
+						return false;
+					});
+
+					// exit fullscreen
+					$('#fullscreen .exitfullscreen').click(function() {
+						$.fullscreen.exit();
+						return false;
+					});
+
+					// document's event
+					$(document).bind('fscreenchange', function(e, state, elem) {
+						// if we currently in fullscreen mode
+						if ($.fullscreen.isFullScreen()) {
+							$('#fullscreen .requestfullscreen').hide();
+							$('#fullscreen .exitfullscreen').show();
+						} else {
+							$('#fullscreen .requestfullscreen').show();
+							$('#fullscreen .exitfullscreen').hide();
+						}
+
+						$('#state').text($.fullscreen.isFullScreen() ? '' : 'not');
+					});
+				});
+		</script>
+
     @stack('scripts')
 
 </body>

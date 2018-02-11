@@ -4,6 +4,15 @@
 @endpush @section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
+   <div class="x_content bs-example-popovers">
+        <div class="alert alert-info alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h3>
+                <strong>Gráficos estadísticos del plantel </strong>Cancún.</h3>
+        </div>
+    </div>
     <div class="row">
         <div class="">
             <div class="row top_tiles">
@@ -12,7 +21,7 @@
                         <div class="icon">
                             <i class="fa fa-thumbs-up"></i>
                         </div>
-                        <div class="count"> {{$actives->count()}}</div>
+                        <div class="count"> {{$actives}}</div>
                         <h3>Alumnos activos</h3>
                     </div>
                 </div>
@@ -21,7 +30,7 @@
                         <div class="icon">
                             <i class="fa fa-thumbs-down"></i>
                         </div>
-                        <div class="count">{{$lows->count()}}</div>
+                        <div class="count">{{$lows}}</div>
                         <h3>Alumnos con baja</h3>
                     </div>
                 </div>
@@ -30,17 +39,8 @@
                         <div class="icon">
                             <i class="fa fa-graduation-cap"></i>
                         </div>
-                        <div class="count">{{$graduates->count()}}</div>
+                        <div class="count">{{$graduates}}</div>
                         <h3>Egresados</h3>
-                    </div>
-                </div>
-                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="tile-stats">
-                        <div class="icon">
-                            <i class="fa fa-users"></i>
-                        </div>
-                        <div class="count">{{$users->count()}}</div>
-                        <h3>Usuarios registrados</h3>
                     </div>
                 </div>
             </div>
@@ -113,22 +113,6 @@
         <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Población por planteles
-                        <small>Graficas</small>
-                    </h2>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        {{--
-                        <div class="demo-container" style="height:280px"> --}} {!! $chart4->html() !!} {{-- </div> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-xs-12">
-            <div class="x_panel">
-                <div class="x_title">
                     <h2>Bajas por sistema (Semiescolarizado / Escolarizado)
                         <small>Graficas</small>
                     </h2>
@@ -142,9 +126,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
+             <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
                     <div class="row x_title">
@@ -167,5 +149,5 @@
     </div>
 </div>
 <!-- /page content -->
-{{-- Charts --}} {!! Charts::scripts() !!} {!! $chart2->script() !!} {!! $chart3->script() !!} {!! $chart4->script() !!}
+{{-- Charts --}} {!! Charts::scripts() !!} {!! $chart2->script() !!} {!! $chart3->script() !!} 
 {!! $chart5->script() !!} {!! $chart6->script() !!} {!! $chart7->script() !!} @endsection

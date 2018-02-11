@@ -738,14 +738,12 @@ class HomeController extends Controller
             ->dimensions(1000, 600)
             ->responsive(true);
 
-        $chart5 = Charts::create('area', 'highcharts')
+        $chart5 = Charts::create('bar', 'highcharts')
             ->title('CARRERAS')
-            ->labels(['ENFERMERIA', 'INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'INGENIERIA CIVIL', 'INGENIERIA EN SISTEMAS', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'MERCADOTECNIA', 'CONTADURIA PUBLICA',
-                'INFORMATICA ADMINISTRATIVA', 'DOCTORADO EN EDUCACIÓN', 'MAESTRÍA EN CALIDAD', 'MESTRÍA EN EDUCACIÓN', 'MAESTRÍA EN DERECHO FISCAL', 'MAESTRÍA EN ADMINISTRACIÓN PUBLICA', 'MAESTRÍA EN COMERCIALIZACIÓN Y VENTAS'])
+            ->labels(['INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'CONTADURIA PUBLICA'])
             ->elementLabel('TOTAL')
             ->template("material")
-            ->values([$enfermeria, $mecanica, $derecho, $civil, $sistemas, $admon, $tsocial, $merca, $conta,
-                $informatica, $doc_educ, $maes_calidad, $maes_educ, $maes_der_fis, $maes_admon_pub, $maes_comer_ven])
+            ->values([$mecanica, $derecho, $admon, $tsocial, $conta])
             ->dimensions(1000, 600)
             ->responsive(true);
 

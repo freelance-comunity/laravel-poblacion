@@ -2,7 +2,7 @@
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
             <a href="{{ url('/') }}" class="site_title">
-                <i class="fa fa-paw"></i>
+                <i class="fa fa-graduation-cap"></i>
                 <span>SICAP</span>
             </a>
         </div>
@@ -41,13 +41,13 @@
                         </a>
                         <ul class="nav child_menu">
                             <li>
-                                <a href="#">Tuxtla</a>
+                                <a href="{{url('tuxtla')}}">Tuxtla</a>
                             </li>
                             <li>
-                                <a href="#">Cancún</a>
+                                <a href="{{url('cancun')}}">Cancún</a>
                             </li>
                             <li>
-                                <a href="#">Tapachula</a>
+                                <a href="{{url('tapachula')}}">Tapachula</a>
                             </li>
                         </ul>
                     </li>
@@ -95,7 +95,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen" class="requestfullscreen">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
             </a>
             <a data-toggle="tooltip" data-placement="top" title="Lock">

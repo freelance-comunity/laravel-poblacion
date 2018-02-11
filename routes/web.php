@@ -14,6 +14,11 @@
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/', 'HomeController@index');
+Route::get('/tuxtla', 'HomeController@tuxtla')->name('tuxtla');
+Route::get('/tapachula', 'HomeController@tapachula')->name('tapachula');
+Route::get('/cancun', 'HomeController@cancun')->name('cancun');
+Route::get('/detailCancun', 'HomeController@detailCancun')->name('detail.cancun');
+Route::post('/filterCancun', 'HomeController@filterCancun');
 
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('control/population', 'Control\\PopulationController');

@@ -86,22 +86,4 @@
         </div>
     </div>
 </div>
-@endsection @push('js')
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#roles').DataTable({
-      "language": {
-         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-       },
-      columnDefs: [{
-        targets: [0],
-        visible: false,
-        searchable: false
-      }, ],
-      order: [
-        [0, "asc"]
-      ],
-    });
-  });
-</script>
-@endpush
+@endsection
