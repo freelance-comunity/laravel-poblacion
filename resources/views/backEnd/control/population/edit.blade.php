@@ -1,6 +1,6 @@
 @extends('backLayout.app')
 @section('title')
-Edit Population
+Editar población
 @stop
 
 @section('content')

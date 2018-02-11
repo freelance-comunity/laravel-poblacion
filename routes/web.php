@@ -23,6 +23,7 @@ Route::post('/filterCancun', 'HomeController@filterCancun');
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('control/population', 'Control\\PopulationController');
 	Route::post('/import-excel', 'Control\\PopulationController@importExcel');
+	Route::post('populationDate/', 'Control\\PopulationController@populationDate')->name('population.date');
 });
 Route::group(['middleware' => ['web']], function () {
 	Route::resource('admin/campus', 'Admin\\CampusController');

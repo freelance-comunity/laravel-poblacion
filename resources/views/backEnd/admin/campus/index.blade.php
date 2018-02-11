@@ -1,4 +1,8 @@
-@extends('layouts.blank') @section('main_container')
+@extends('layouts.blank') 
+@section('title')
+Planteles
+@endsection 
+@section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
     @if(session()->has('message'))
@@ -17,9 +21,9 @@
     </h1>
     <div class="table table-responsive">
     @can('ver_planteles')
-        <table class="table table-bordered table-striped table-hover" id="campus">
-            <thead class="heading">
-                <tr>
+        <table class="table table-striped jambo_table bulk_action" id="campus">
+            <thead>
+                <tr class="headings">
                     <th>ID</th>
                     <th>Name</th>
                     <th>Address</th>

@@ -1,4 +1,8 @@
-@extends('layouts.blank') @section('main_container')
+@extends('layouts.blank') 
+@section('title')
+Usuarios
+@endsection 
+@section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
     @if(session()->has('message'))
@@ -18,7 +22,7 @@
     </h1>
     <div class="table table-responsive">
     @can('ver_usuarios')
-        <table class="table table-bordered table-striped table-hover" id="user">
+        <table class="table table-striped jambo_table bulk_action" id="user">
             <thead>
                 <tr>
                     <th>ID</th>

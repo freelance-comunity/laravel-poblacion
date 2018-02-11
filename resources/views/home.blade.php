@@ -1,4 +1,4 @@
-@extends('layouts.blank') @push('stylesheets')
+@extends('layouts.blank') @section('title') Inicio @endsection @push('stylesheets')
 <!-- Example -->
 <!--<link href=" <link href="{{ asset("css/myFile.min.css") }}" rel="stylesheet">" rel="stylesheet">-->
 @endpush @section('main_container')
@@ -58,9 +58,24 @@
                         </div>
                         <div class="col-md-6">
                             <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                <span>December 30, 2014 - January 28, 2015</span>
-                                <b class="caret"></b>
+                                <div class="input-prepend input-group">
+                                    {!! Form::open(['url' => 'populationDate', 'class' => 'form-inline']) !!}
+                                    <div class="form-group">
+                                        <label for="email">Fecha inicio:</label>
+                                        <input type="date" class="form-control" name="start" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Fecha fin:</label>
+                                        <input type="date" class="form-control" name="end" required>
+                                    </div>
+                                    {{-- <div class="ln_solid"></div> --}}
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <button type="submit" class="btn btn-lg btn-success">Consultar</button>
+                                        </div>
+                                    </div>
+                                    {!! Form::close() !!}
+                                </div>
                             </div>
                         </div>
                     </div>

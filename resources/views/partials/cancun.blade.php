@@ -1,4 +1,8 @@
-@extends('layouts.blank') @push('stylesheets')
+@extends('layouts.blank')
+@section('title')
+Cancún
+@endsection 
+@push('stylesheets')
 <!-- Example -->
 <!--<link href=" <link href="{{ asset("css/myFile.min.css") }}" rel="stylesheet">" rel="stylesheet">-->
 @endpush @section('main_container')

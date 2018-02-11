@@ -1,4 +1,8 @@
-@extends('layouts.blank') @section('main_container')
+@extends('layouts.blank') 
+@section('title')
+Población escolar
+@endsection 
+@section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
     @if(session()->has('message'))
@@ -17,7 +21,7 @@
         <a href="{{ url('control/population/create') }}" class="btn btn-primary pull-right btn-sm">Agregar Nuevo Registro</a>@endcan
     </h1>
     <div class="table table-responsive">
-        <table class="table table-bordered table-striped table-hover" id="population">
+        <table class="table table-striped jambo_table bulk_action" id="population">
             <thead class="heading">
                 <tr>
                     <th>ID</th>
@@ -47,10 +51,8 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->turn }}</td>
                     <td>
-                       
                         <a href="{{ url('control/population/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs">Actualizar</a> 
                         {!! Form::open([ 'method'=>'DELETE', 'url' => ['control/population',$item->id], 'style' => 'display:inline' ]) !!} {!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-xs']) !!} {!! Form::close() !!}
-                       
                     </td>
                 </tr>
                 @endforeach
@@ -58,31 +60,7 @@
         </table>
     </div>
 </div>
-<div class="modal fade excel" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Cargar archivo Excel de población</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="{{url('import-excel')}}" enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    <label class="uk-form-label" for="form-stacked-select">Seleccionar archivo</label>
-                    <input type="file" name="excel" id="excel" onchange="checkfile(this);" class="form-control" required> {!! $errors->first('excel', '
-                    <p class="help-block">:message</p>') !!}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                {!! Form::submit('Subir', ['class' => 'btn btn-primary']) !!}
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
+@include('backEnd.control.population.excel')
 <!-- /page content -->
 @endsection @push('scripts')
 <script type="text/javascript">

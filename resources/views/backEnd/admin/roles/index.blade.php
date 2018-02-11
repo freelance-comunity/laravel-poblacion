@@ -1,4 +1,8 @@
-@extends('layouts.blank') @section('main_container')
+@extends('layouts.blank') 
+@section('title')
+Roles
+@endsection 
+@section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
     @if(session()->has('message'))

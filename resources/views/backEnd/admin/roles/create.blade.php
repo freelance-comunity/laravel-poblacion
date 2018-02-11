@@ -1,4 +1,8 @@
-@extends('backLayout.app') @section('title') Crear Nuevo Rol @stop @section('content')
+@extends('backLayout.app') 
+@section('title')
+Crear rol
+@endsection 
+@section('title') Crear Nuevo Rol @stop @section('content')
 <hr/>
 <div class="box">
   <div class="box-header">
