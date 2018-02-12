@@ -227,13 +227,21 @@ class PopulationController extends Controller
     }
 
         public function populationDate(Request $request)
-    {
+    {   
+        $this->validate($request, ['start' => 'required|date', 'end' => 'required|date']);
+
         $start_input = $request->input('start');
         $end_input = $request->input('end');
         $start = new Carbon($start_input);
         $end = new Carbon($end_input);
         $from = $start->toDateTimeString();
         $to = $end->toDateTimeString();
+
+        if ($to < $from) {
+            Session::flash('message', 'La fecha fin debe de ser mayor a la fecha de inicio.');
+            Session::flash('status', 'success');
+            return redirect('/');
+        }
 
         // $current = Population::whereBetween('created_at', array($from, $to))->get();
         // return $current;

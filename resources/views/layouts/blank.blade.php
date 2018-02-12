@@ -23,9 +23,7 @@
     @stack('stylesheets')
 
 </head>
-
-<body class="nav-md">
-<div id="fullscreen">
+<body class="nav-md" id="fullscreen">
     <div class="container body">
         <div class="main_container">
 
@@ -39,7 +37,6 @@
 
         </div>
     </div>
-</div>
     <!-- jQuery -->
     <script src="{{ asset("js/jquery.min.js") }}"></script>
     <!-- Bootstrap -->
@@ -84,7 +81,5 @@
 		</script>
 
     @stack('scripts')
-
 </body>
-
 </html>

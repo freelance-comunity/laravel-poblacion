@@ -33,7 +33,7 @@ class HomeController extends Controller
         $b = Population::where('status', 'B');
         $esco = Population::where('system', 'ESCOLARIZADO');
         $semi = Population::where('system', 'SEMIESCOLARIZADO');
-        $graduates = Population::where('intern_letter', 'SI');
+        $graduates = Population::where('status', 'E');
 
         // Consultas activos y bajas
         $actives = Population::where('status', 'A');
@@ -165,7 +165,7 @@ class HomeController extends Controller
             ['campus', '=', 'TUXTLA'],
         ])->count();
         $graduates = DB::table('populations')->where([
-            ['intern_letter', '=', 'SI'],
+            ['status', '=', 'E'],
             ['campus', '=', 'TUXTLA'],
         ])->count();
 
@@ -317,7 +317,7 @@ class HomeController extends Controller
             ->dimensions(1000, 600)
             ->responsive(true);
 
-        $chart5 = Charts::create('area', 'highcharts')
+        $chart5 = Charts::create('bar', 'highcharts')
             ->title('CARRERAS')
             ->labels(['ENFERMERIA', 'INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'INGENIERIA CIVIL', 'INGENIERIA EN SISTEMAS', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'MERCADOTECNIA', 'CONTADURIA PUBLICA',
                 'INFORMATICA ADMINISTRATIVA', 'DOCTORADO EN EDUCACIÓN', 'MAESTRÍA EN CALIDAD', 'MESTRÍA EN EDUCACIÓN', 'MAESTRÍA EN DERECHO FISCAL', 'MAESTRÍA EN ADMINISTRACIÓN PUBLICA', 'MAESTRÍA EN COMERCIALIZACIÓN Y VENTAS'])
@@ -354,6 +354,148 @@ class HomeController extends Controller
             ->with('chart7', $chart7);
     }
 
+
+    public function detailTuxtla()
+    {     
+       // Consultas por carrera
+          $enfermeria = DB::table('populations')->where([
+            ['career', '=', 'ENFERMERIA'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $mecanica = DB::table('populations')->where([
+            ['career', '=', 'INGENIERIA MECANICA AUTOMOTRIZ'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $derecho = DB::table('populations')->where([
+            ['career', '=', 'DERECHO'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $civil = DB::table('populations')->where([
+            ['career', '=', 'INGENIERIA CIVIL'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $sistemas = DB::table('populations')->where([
+            ['career', '=', 'INGENIERIA EN SISTEMAS'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $admon = DB::table('populations')->where([
+            ['career', '=', 'ADMINISTRACION DE EMPRESAS'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $tsocial = DB::table('populations')->where([
+            ['career', '=', 'TRABAJO SOCIAL'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $merca = DB::table('populations')->where([
+            ['career', '=', 'MERCADOTECNIA'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $conta = DB::table('populations')->where([
+            ['career', '=', 'CONTADURIA PUBLICA'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $informatica = DB::table('populations')->where([
+            ['career', '=', 'INFORMATICA ADMINISTRATIVA'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $doc_educ = DB::table('populations')->where([
+            ['career', '=', 'DOCTORADO EN EDUCACION'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_calidad = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN CALIDAD'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $maes_educ = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN EDUCACION'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_der_fis = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN DERECHO FISCAL'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_admon_pub = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN ADMINISTRACION PUBLICA'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_comer_ven = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN COMERCIALIZACION Y VENTAS'],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+
+        $chart5 = Charts::create('bar', 'highcharts')
+            ->title('CARRERAS')
+            ->labels(['ENFERMERIA', 'INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'INGENIERIA CIVIL', 'INGENIERIA EN SISTEMAS', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'MERCADOTECNIA', 'CONTADURIA PUBLICA',
+                'INFORMATICA ADMINISTRATIVA', 'DOCTORADO EN EDUCACIÓN', 'MAESTRÍA EN CALIDAD', 'MESTRÍA EN EDUCACIÓN', 'MAESTRÍA EN DERECHO FISCAL', 'MAESTRÍA EN ADMINISTRACIÓN PUBLICA', 'MAESTRÍA EN COMERCIALIZACIÓN Y VENTAS'])
+            ->elementLabel('TOTAL')
+            ->template("material")
+            ->values([$enfermeria, $mecanica, $derecho, $civil, $sistemas, $admon, $tsocial, $merca, $conta,
+                $informatica, $doc_educ, $maes_calidad, $maes_educ, $maes_der_fis, $maes_admon_pub, $maes_comer_ven])
+            ->dimensions(1000, 600)
+            ->responsive(true);
+
+        return view('partials.detailTuxtla')
+            ->with('chart5', $chart5);
+    }
+
+    public function filterTuxtla(Request $request)
+    {   
+        $career = $request->input('carrera');
+        $status = $request->input('estatus');
+        $system = $request->input('sistema');
+             
+            $query = DB::table('populations')->where([
+            ['career', '=', $career],
+            ['campus', '=', 'TUXTLA'],
+            ['status', '=', $status],
+            ['system', '=', $system],
+            ])->count();
+
+        $chart5 = Charts::create('bar', 'highcharts')
+            ->title('CARRERAS')
+            ->labels([$career])
+            ->elementLabel('TOTAL')
+            ->template("material")
+            ->values([$query])
+            ->dimensions(1000, 600)
+            ->responsive(true);
+
+        return view('partials.detailTuxtla')
+            ->with('chart5', $chart5);
+    }
+
     public function tapachula()
     {
         $a = DB::table('populations')->where([
@@ -375,9 +517,9 @@ class HomeController extends Controller
             ['campus', '=', 'TAPACHULA'],
         ])->count();
         $graduates = DB::table('populations')->where([
-            ['intern_letter', '=', 'SI'],
+            ['status', '=', 'E'],
             ['campus', '=', 'TAPACHULA'],
-        ])->count();
+        ])->count(); 
 
         // Consultas activos y bajas
         $actives = DB::table('populations')->where([
@@ -527,7 +669,7 @@ class HomeController extends Controller
             ->dimensions(1000, 600)
             ->responsive(true);
 
-        $chart5 = Charts::create('area', 'highcharts')
+        $chart5 = Charts::create('bar', 'highcharts')
             ->title('CARRERAS')
             ->labels(['ENFERMERIA', 'INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'INGENIERIA CIVIL', 'INGENIERIA EN SISTEMAS', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'MERCADOTECNIA', 'CONTADURIA PUBLICA',
                 'INFORMATICA ADMINISTRATIVA', 'DOCTORADO EN EDUCACIÓN', 'MAESTRÍA EN CALIDAD', 'MESTRÍA EN EDUCACIÓN', 'MAESTRÍA EN DERECHO FISCAL', 'MAESTRÍA EN ADMINISTRACIÓN PUBLICA', 'MAESTRÍA EN COMERCIALIZACIÓN Y VENTAS'])
@@ -564,6 +706,147 @@ class HomeController extends Controller
             ->with('chart7', $chart7);
     }
 
+        public function detailTapachula()
+    {     
+       // Consultas por carrera
+          $enfermeria = DB::table('populations')->where([
+            ['career', '=', 'ENFERMERIA'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $mecanica = DB::table('populations')->where([
+            ['career', '=', 'INGENIERIA MECANICA AUTOMOTRIZ'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $derecho = DB::table('populations')->where([
+            ['career', '=', 'DERECHO'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $civil = DB::table('populations')->where([
+            ['career', '=', 'INGENIERIA CIVIL'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $sistemas = DB::table('populations')->where([
+            ['career', '=', 'INGENIERIA EN SISTEMAS'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $admon = DB::table('populations')->where([
+            ['career', '=', 'ADMINISTRACION DE EMPRESAS'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $tsocial = DB::table('populations')->where([
+            ['career', '=', 'TRABAJO SOCIAL'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $merca = DB::table('populations')->where([
+            ['career', '=', 'MERCADOTECNIA'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $conta = DB::table('populations')->where([
+            ['career', '=', 'CONTADURIA PUBLICA'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $informatica = DB::table('populations')->where([
+            ['career', '=', 'INFORMATICA ADMINISTRATIVA'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $doc_educ = DB::table('populations')->where([
+            ['career', '=', 'DOCTORADO EN EDUCACION'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_calidad = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN CALIDAD'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+         $maes_educ = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN EDUCACION'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_der_fis = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN DERECHO FISCAL'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_admon_pub = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN ADMINISTRACION PUBLICA'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+        $maes_comer_ven = DB::table('populations')->where([
+            ['career', '=', 'MAESTRIA EN COMERCIALIZACION Y VENTAS'],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', 'A'],
+        ])->count();
+
+
+        $chart5 = Charts::create('bar', 'highcharts')
+            ->title('CARRERAS')
+            ->labels(['ENFERMERIA', 'INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'INGENIERIA CIVIL', 'INGENIERIA EN SISTEMAS', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'MERCADOTECNIA', 'CONTADURIA PUBLICA',
+                'INFORMATICA ADMINISTRATIVA', 'DOCTORADO EN EDUCACIÓN', 'MAESTRÍA EN CALIDAD', 'MESTRÍA EN EDUCACIÓN', 'MAESTRÍA EN DERECHO FISCAL', 'MAESTRÍA EN ADMINISTRACIÓN PUBLICA', 'MAESTRÍA EN COMERCIALIZACIÓN Y VENTAS'])
+            ->elementLabel('TOTAL')
+            ->template("material")
+            ->values([$enfermeria, $mecanica, $derecho, $civil, $sistemas, $admon, $tsocial, $merca, $conta,
+                $informatica, $doc_educ, $maes_calidad, $maes_educ, $maes_der_fis, $maes_admon_pub, $maes_comer_ven])
+            ->dimensions(1000, 600)
+            ->responsive(true);
+
+        return view('partials.detailTapachula')
+            ->with('chart5', $chart5);
+    }
+
+    public function filterTapachula(Request $request)
+    {   
+        $career = $request->input('carrera');
+        $status = $request->input('estatus');
+        $system = $request->input('sistema');
+             
+            $query = DB::table('populations')->where([
+            ['career', '=', $career],
+            ['campus', '=', 'TAPACHULA'],
+            ['status', '=', $status],
+            ['system', '=', $system],
+            ])->count();
+
+        $chart5 = Charts::create('bar', 'highcharts')
+            ->title('CARRERAS')
+            ->labels([$career])
+            ->elementLabel('TOTAL')
+            ->template("material")
+            ->values([$query])
+            ->dimensions(1000, 600)
+            ->responsive(true);
+
+        return view('partials.detailTapachula')
+            ->with('chart5', $chart5);
+    }
+
     public function cancun()
     {
         $a = DB::table('populations')->where([
@@ -585,7 +868,7 @@ class HomeController extends Controller
             ['campus', '=', 'CANCUN'],
         ])->count();
         $graduates = DB::table('populations')->where([
-            ['intern_letter', '=', 'SI'],
+            ['status', '=', 'E'],
             ['campus', '=', 'CANCUN'],
         ])->count();
 
@@ -823,78 +1106,22 @@ class HomeController extends Controller
     {   
         $career = $request->input('carrera');
         $status = $request->input('estatus');
-        if ($career == 1) {
-            $mecanica = DB::table('populations')->where([
-            ['career', '=', 'INGENIERIA MECANICA AUTOMOTRIZ'],
-            ['campus', '=', 'CANCUN'],
-            ['status', '=', $status],
-            ])->count();
-            $derecho = 0;
-            $admon = 0;
-            $tsocial = 0;
-            $conta = 0;
-        }
-        if ($career == 2) {
-            $mecanica = 0;
-            
-            $derecho = DB::table('populations')->where([
-            ['career', '=', 'DERECHO'],
-            ['campus', '=', 'CANCUN'],
-            ['status', '=', $status],
-            ])->count();
-            $admon = 0;
-            $tsocial = 0;
-            $conta = 0;
-        }
-        if ($career == 3) {
-            $mecanica = 0;            
-            $derecho = 0;
-            $admon = DB::table('populations')->where([
-            ['career', '=', 'ADMINISTRACION DE EMPRESAS'],
-            ['campus', '=', 'CANCUN'],
-            ['status', '=', $status],
-            ])->count();
-            $tsocial = 0;
-            $conta = 0;
-        }
+        $system = $request->input('sistema');
 
-        if ($career == 4) {
-            $mecanica = 0;            
-            $derecho = 0;
-            $admon = 0;
-            $tsocial = DB::table('populations')->where([
-            ['career', '=', 'TRABAJO SOCIAL'],
+            $query = DB::table('populations')->where([
+            ['career', '=', $career],
             ['campus', '=', 'CANCUN'],
             ['status', '=', $status],
+            ['system', '=', $system],
             ])->count();
-            $conta = 0;
-        }
-
-        if ($career == 5) {
-            $mecanica = 0;            
-            $derecho = 0;
-            $admon = 0;
-            $tsocial = 0;
-            $conta = DB::table('populations')->where([
-            ['career', '=', 'CONTADURIA PUBLICA'],
-            ['campus', '=', 'CANCUN'],
-            ['status', '=', $status],
-            ])->count();
-        }
-        // else {
-        //     $mecanica = 0;            
-        //     $derecho = 0;
-        //     $admon = 0;
-        //     $tsocial = 0;
-        //     $conta = 0;
-        // }
+    
 
         $chart5 = Charts::create('bar', 'highcharts')
             ->title('CARRERAS')
-            ->labels(['INGENIERIA MECANICA AUTOMOTRIZ', 'DERECHO', 'ADMINISTRACIÓN DE EMPRESAS', 'TRABAJO SOCIAL', 'CONTADURIA PUBLICA'])
+            ->labels([$career])
             ->elementLabel('TOTAL')
             ->template("material")
-            ->values([$mecanica, $derecho, $admon, $tsocial, $conta])
+            ->values([$query])
             ->dimensions(1000, 600)
             ->responsive(true);
 
@@ -942,24 +1169,4 @@ class HomeController extends Controller
             ->with('chart4', $chart4);
     }
 
-    /**
-     *  Generar fecha limite condensada
-     *
-     *
-     */
-    public function reference()
-    {
-        $monto = 2550;
-        $fecha_limite = '2018-01-08';
-        //CALCULO DE LA FECHA CONDENSADA
-        $fechalimite = explode("-", $fecha_limite);
-        //Calculamos Año
-        $fecha['anio'] = (((int) $fechalimite[0] - 2009) * 372);
-        //Calculamos en Mes
-        $fecha['mes'] = (((int) $fechalimite[1] - 1) * 31);
-        //Calculamos dís
-        $fecha['dia'] = ((int) $fechalimite[2] - 1);
-        $suma_fecha = ($fecha['anio'] + $fecha['mes'] + $fecha['dia']);
-        $fecha_condensada = substr($suma_fecha, 0, 4);
-    }
 }

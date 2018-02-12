@@ -4,6 +4,17 @@
 @endpush @section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
+      @if(session()->has('message'))
+    <div class="x_content bs-example-popovers">
+        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h3>
+                <strong>Mensaje del sistema:</strong> {{ session()->get('message') }}</h3>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="">
             <div class="row top_tiles">
@@ -59,6 +70,7 @@
                         <div class="col-md-6">
                             <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                                 <div class="input-prepend input-group">
+                                <code>Consultar por rango de fechas</code>
                                     {!! Form::open(['url' => 'populationDate', 'class' => 'form-inline']) !!}
                                     <div class="form-group">
                                         <label for="email">Fecha inicio:</label>
@@ -68,7 +80,8 @@
                                         <label for="pwd">Fecha fin:</label>
                                         <input type="date" class="form-control" name="end" required>
                                     </div>
-                                    {{-- <div class="ln_solid"></div> --}}
+                                    {{--
+                                    <div class="ln_solid"></div> --}}
                                     <div class="form-group">
                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                             <button type="submit" class="btn btn-lg btn-success">Consultar</button>
