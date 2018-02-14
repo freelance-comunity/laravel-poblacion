@@ -38,7 +38,18 @@ class HomeController extends Controller
         // Consultas activos y bajas
         $actives = Population::where('status', 'A');
         $lows = Population::where('status', 'B');
-
+        $lowsDefinitive = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['definitive', '=', 'SI'],
+        ])->count();
+        $lowsTemporary = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['temporary', '=', 'SI'],
+        ])->count();
+        $lowsAdministrative = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['administrative', '=', 'SI'],
+        ])->count();
         // Consulta activos y bajas por sistema educativo
         // $escoLows = $lows->where('system', 'ESCOLARIZADO');
         $escoLows = DB::table('populations')->where([
@@ -135,6 +146,9 @@ class HomeController extends Controller
             ->with('users', $users)
             ->with('actives', $actives)
             ->with('lows', $lows)
+            ->with('lowsDefinitive', $lowsDefinitive)
+            ->with('lowsTemporary', $lowsTemporary)
+            ->with('lowsAdministrative', $lowsAdministrative)
             ->with('graduates', $graduates)
             ->with('chart2', $chart2)
             ->with('chart3', $chart3)
@@ -178,6 +192,55 @@ class HomeController extends Controller
             ['status', '=', 'B'],
             ['campus', '=', 'TUXTLA'],
         ])->count();
+        $lowsDefinitiveEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['definitive', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsTemporaryEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['temporary', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsAdministrativeEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['administrative', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsDefinitiveSemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['definitive', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsTemporarySemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['temporary', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsAdministrativeSemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['administrative', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsSaturday = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['semi_day', '=', 'SABADO'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsSunday = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TUXTLA'],
+            ['semi_day', '=', 'DOMINGO'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+
 
         // Consulta activos y bajas por sistema educativo
         $escoLows = DB::table('populations')->where([
@@ -346,6 +409,14 @@ class HomeController extends Controller
         return view('partials.tuxtla')
             ->with('actives', $actives)
             ->with('lows', $lows)
+            ->with('lowsDefinitiveEsco', $lowsDefinitiveEsco)
+            ->with('lowsTemporaryEsco', $lowsTemporaryEsco)
+            ->with('lowsAdministrativeEsco', $lowsAdministrativeEsco)
+            ->with('lowsDefinitiveSemi', $lowsDefinitiveSemi)
+            ->with('lowsTemporarySemi', $lowsTemporarySemi)
+            ->with('lowsAdministrativeSemi', $lowsAdministrativeSemi)
+            ->with('lowsSaturday', $lowsSaturday)
+            ->with('lowsSunday', $lowsSunday)
             ->with('graduates', $graduates)
             ->with('chart2', $chart2)
             ->with('chart3', $chart3)
@@ -530,6 +601,54 @@ class HomeController extends Controller
             ['status', '=', 'B'],
             ['campus', '=', 'TAPACHULA'],
         ])->count();
+        $lowsDefinitiveEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['definitive', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsTemporaryEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['temporary', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsAdministrativeEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['administrative', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsDefinitiveSemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['definitive', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsTemporarySemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['temporary', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsAdministrativeSemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['administrative', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsSaturday = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['semi_day', '=', 'SABADO'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsSunday = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'TAPACHULA'],
+            ['semi_day', '=', 'DOMINGO'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
 
         // Consulta activos y bajas por sistema educativo
         $escoLows = DB::table('populations')->where([
@@ -698,6 +817,14 @@ class HomeController extends Controller
         return view('partials.tapachula')
             ->with('actives', $actives)
             ->with('lows', $lows)
+            ->with('lowsDefinitiveEsco', $lowsDefinitiveEsco)
+            ->with('lowsTemporaryEsco', $lowsTemporaryEsco)
+            ->with('lowsAdministrativeEsco', $lowsAdministrativeEsco)
+            ->with('lowsDefinitiveSemi', $lowsDefinitiveSemi)
+            ->with('lowsTemporarySemi', $lowsTemporarySemi)
+            ->with('lowsAdministrativeSemi', $lowsAdministrativeSemi)
+            ->with('lowsSaturday', $lowsSaturday)
+            ->with('lowsSunday', $lowsSunday)
             ->with('graduates', $graduates)
             ->with('chart2', $chart2)
             ->with('chart3', $chart3)
@@ -881,6 +1008,54 @@ class HomeController extends Controller
             ['status', '=', 'B'],
             ['campus', '=', 'CANCUN'],
         ])->count();
+        $lowsDefinitiveEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['definitive', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsTemporaryEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['temporary', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsAdministrativeEsco = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['administrative', '=', 'SI'],
+            ['system', '=', 'ESCOLARIZADO'],
+        ])->count();
+        $lowsDefinitiveSemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['definitive', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsTemporarySemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['temporary', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsAdministrativeSemi = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['administrative', '=', 'SI'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsSaturday = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['semi_day', '=', 'SABADO'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
+        $lowsSunday = DB::table('populations')->where([
+            ['status', '=', 'B'],
+            ['campus', '=', 'CANCUN'],
+            ['semi_day', '=', 'DOMINGO'],
+            ['system', '=', 'SEMIESCOLARIZADO'],
+        ])->count();
 
         // Consulta activos y bajas por sistema educativo
         $escoLows = DB::table('populations')->where([
@@ -1048,6 +1223,14 @@ class HomeController extends Controller
         return view('partials.cancun')
             ->with('actives', $actives)
             ->with('lows', $lows)
+            ->with('lowsDefinitiveEsco', $lowsDefinitiveEsco)
+            ->with('lowsTemporaryEsco', $lowsTemporaryEsco)
+            ->with('lowsAdministrativeEsco', $lowsAdministrativeEsco)
+            ->with('lowsDefinitiveSemi', $lowsDefinitiveSemi)
+            ->with('lowsTemporarySemi', $lowsTemporarySemi)
+            ->with('lowsAdministrativeSemi', $lowsAdministrativeSemi)
+            ->with('lowsSaturday', $lowsSaturday)
+            ->with('lowsSunday', $lowsSunday)
             ->with('graduates', $graduates)
             ->with('chart2', $chart2)
             ->with('chart3', $chart3)
@@ -1108,14 +1291,29 @@ class HomeController extends Controller
         $status = $request->input('estatus');
         $system = $request->input('sistema');
 
+        $var1 = "SEMIESCOLARIZADO";
+        $var2 = "ESCOLARIZADO";
+
+        if (strcmp($var1, $system) !== 0) {
             $query = DB::table('populations')->where([
             ['career', '=', $career],
             ['campus', '=', 'CANCUN'],
             ['status', '=', $status],
             ['system', '=', $system],
             ])->count();
-    
+        }
+        elseif (strcmp($var1, $system) == 0) {
+            $day = $request->input('dia');
 
+            $query = DB::table('populations')->where([
+            ['career', '=', $career],
+            ['campus', '=', 'CANCUN'],
+            ['status', '=', $status],
+            ['system', '=', $system],
+            ['semi_day', '=', $day],
+            ])->count();
+        }
+            
         $chart5 = Charts::create('bar', 'highcharts')
             ->title('CARRERAS')
             ->labels([$career])

@@ -115,9 +115,16 @@ Tuxtla Gutiérrez
         <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Bajas por sistema (Semiescolarizado / Escolarizado)
-                        <small>Graficas</small>
-                    </h2>
+                   <div class="col-md-6">
+                        <h2>Bajas por sistema (Semiescolarizado / Escolarizado)
+                            <small>Graficas</small>
+                        </h2>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px;">
+                            <button type="button" class="btn btn-primary pull-right btn-sm" data-toggle="modal" data-target=".excel">Ver detalles</button>
+                        </div>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -128,6 +135,7 @@ Tuxtla Gutiérrez
                 </div>
             </div>
         </div>
+         @include('partials.lowsTuxtla')
              <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">

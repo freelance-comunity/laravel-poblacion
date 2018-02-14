@@ -1,14 +1,10 @@
-@extends('layouts.blank')
-@section('title')
-Cancún
-@endsection 
-@push('stylesheets')
+@extends('layouts.blank') @section('title') Cancún @endsection @push('stylesheets')
 <!-- Example -->
 <!--<link href=" <link href="{{ asset("css/myFile.min.css") }}" rel="stylesheet">" rel="stylesheet">-->
 @endpush @section('main_container')
 <!-- page content -->
 <div class="right_col" role="main">
-   <div class="x_content bs-example-popovers">
+    <div class="x_content bs-example-popovers">
         <div class="alert alert-info alert-dismissible fade in" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
@@ -115,9 +111,16 @@ Cancún
         <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Bajas por sistema (Semiescolarizado / Escolarizado)
-                        <small>Graficas</small>
-                    </h2>
+                      <div class="col-md-6">
+                        <h2>Bajas por sistema (Semiescolarizado / Escolarizado)
+                            <small>Graficas</small>
+                        </h2>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px;">
+                            <button type="button" class="btn btn-primary pull-right btn-sm" data-toggle="modal" data-target=".excel">Ver detalles</button>
+                        </div>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -128,7 +131,8 @@ Cancún
                 </div>
             </div>
         </div>
-             <div class="col-md-6 col-xs-12">
+         @include('partials.lowsCancun')
+        <div class="col-md-6 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
                     <div class="row x_title">
@@ -151,5 +155,5 @@ Cancún
     </div>
 </div>
 <!-- /page content -->
-{{-- Charts --}} {!! Charts::scripts() !!} {!! $chart2->script() !!} {!! $chart3->script() !!} 
-{!! $chart5->script() !!} {!! $chart6->script() !!} {!! $chart7->script() !!} @endsection
+{{-- Charts --}} {!! Charts::scripts() !!} {!! $chart2->script() !!} {!! $chart3->script() !!} {!! $chart5->script() !!}
+{!! $chart6->script() !!} {!! $chart7->script() !!} @endsection

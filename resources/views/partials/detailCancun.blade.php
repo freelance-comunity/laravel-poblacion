@@ -31,7 +31,7 @@
                         {!! Form::open(['url' => 'filterCancun', 'class' => 'form-inline']) !!}
                         <div class="form-group">
                             <label for="email">Carrera:</label>
-                            <select class="form-control" name="carrera">
+                            <select class="form-control" name="carrera" old('carrera')>
                                 <option value="INGENIERIA MECANICA AUTOMOTRIZ">INGENIERIA MECANICA AUTOMOTRIZ</option>
                                 <option value="DERECHO">DERECHO</option>
                                 <option value="ADMINISTRACION DE EMPRESAS">ADMINISTRACION DE EMPRESAS</option>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label for="pwd">Estatus:</label>
-                            <select name="estatus" class="form-control">
+                            <select name="estatus" class="form-control" old('estatus')>
                             <option value="A">ACTIVOS</option>
                             <option value="B">BAJAS</option>
                             <option value="E">EGRESADOS</option>
@@ -49,9 +49,16 @@
                         </div>
                          <div class="form-group">
                             <label for="pwd">Sistema:</label>
-                            <select name="sistema" class="form-control">
+                            <select name="sistema" class="form-control" id="type">
                             <option value="ESCOLARIZADO">ESCOLARIZADO</option>
-                            <option value="SEMIESCOLARIZADO">SEMI ESCOLARIZADO</option>
+                            <option value="SEMIESCOLARIZADO">SEMIESCOLARIZADO</option>
+                        </select>
+                        </div>
+                         <div class="form-group" id="row_day">
+                            <label for="pwd">Día:</label>
+                            <select name="dia" class="form-control">
+                            <option value="SABADO">SABADO</option>
+                            <option value="DOMINGO">DOMINGO</option>
                         </select>
                         </div>
                         {{--
@@ -90,3 +97,16 @@
 </div>
 <!-- /page content -->
 {{-- Charts --}} {!! Charts::scripts() !!} {!! $chart5->script() !!} @endsection
+@push('scripts')
+<script type="text/javascript">
+$(function () {
+     $('#row_day').hide();
+     $('#type').change(function () {
+         $('#row_day').hide();
+         if (this.options[this.selectedIndex].value == 'SEMIESCOLARIZADO') {
+             $('#row_day').show();
+         }
+     });
+ });
+</script>
+@endpush
